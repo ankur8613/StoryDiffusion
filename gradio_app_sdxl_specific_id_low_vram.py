@@ -78,6 +78,12 @@ def reload_model(pipe, new_model, device="cuda"):
     pipe = new_model
     return pipe
 
+def load_model(model_name):
+    """Simulate loading a model (replace with actual loading logic)."""
+    print(f"Loading model: {model_name}")
+    # Your model loading logic here, e.g., loading a pre-trained model
+    return f"Model {model_name}"
+
 def setup_seed(seed):
     torch.manual_seed(seed)
     if device == "cuda":
