@@ -65,6 +65,18 @@ else:
 
 MAX_SEED = np.iinfo(np.int32).max
 
+def clear_memory():
+    """Function to clear memory explicitly."""
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+def reload_model(pipe, new_model, device="cuda"):
+    """Function to reload the model and clear memory."""
+    del pipe
+    clear_memory()
+    pipe = new_model
+    return pipe
 
 def setup_seed(seed):
     torch.manual_seed(seed)
@@ -753,6 +765,8 @@ def process_generation(
     gc.collect()
     torch.cuda.empty_cache()
     if cur_model_type != _sd_type + "-" + _model_type:
+        new_model = load_new_model_function(...)
+        pipe = reload_model(pipe, new_model, device)
         # apply the style template
         ##### load pipe
         del pipe
