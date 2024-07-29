@@ -771,7 +771,7 @@ def process_generation(
     gc.collect()
     torch.cuda.empty_cache()
     if cur_model_type != _sd_type + "-" + _model_type:
-        new_model = load_new_model_function(...)
+        new_model = load_model(...)
         pipe = reload_model(pipe, new_model, device)
         # apply the style template
         ##### load pipe
